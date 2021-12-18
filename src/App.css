@@ -1,3 +1,7 @@
 .leaflet-control-container {
-  min-height: 95vh;
+  height: 55vh;
+}
+
+.app {
+  padding: 1rem;
 }

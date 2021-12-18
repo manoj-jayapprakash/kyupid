@@ -1,4 +1,4 @@
-export const Dashboard = () => {
+export const Dashboard = ({ area, users }) => {
   return (
     <section className="dashboard">
       <p>Dashboard</p>
