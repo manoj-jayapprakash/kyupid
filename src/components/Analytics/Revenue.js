@@ -18,7 +18,7 @@ ChartJS.register(
   Legend
 );
 
-export const Revenue = ({ areas, users }) => {
+export const Revenue = ({ revenue, areaNames }) => {
   // console.log(users.features);
   const options = {
     responsive: true,
@@ -33,7 +33,25 @@ export const Revenue = ({ areas, users }) => {
     },
   };
 
-  const labels = areas.features.map((feature) => feature.properties.name);
+  const labels = Object.values(areaNames);
 
-  return <section className="revenue">{/* <Bar /> */}</section>;
+  const revenueData = {
+    labels,
+    datasets: [
+      {
+        label: 'Number of Premium Users',
+        data: Object.values(revenue),
+        backgroundColor: '#ECB365',
+      },
+    ],
+  };
+
+  return (
+    <section className="revenue">
+      <article className="area-data">
+        <p className="user-data__title">Number of Premium Users Per Area</p>
+        <Bar data={revenueData} />
+      </article>
+    </section>
+  );
 };
