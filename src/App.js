@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { MapArea } from './components/MapArea/MapArea';
 import { formatData } from './components/data';
+
 function App() {
   const [apiData, setApiData] = useState(null);
 
@@ -22,7 +23,8 @@ function App() {
     fetchData();
   }, []);
 
-  if (!apiData) return <p>Loading</p>;
+  if (!apiData) return <p className="loading">Loading</p>;
+
   const data = formatData(apiData);
 
   return (

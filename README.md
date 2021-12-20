@@ -1,1 +1,3 @@
 Kyupid is a new dating app/service based on Bangalore. The app matches the users based on their gender with other users from the nearest area and has users across Bangalore in a wide demographic. The company has shared the data with us to understand their users better and gain insights. Given the sample GeoJSON file containing the area boundary of Bangalore city via our API. Use our APIs which provides Data of the users within Bangalore for Kyupid. Create a web application which can help the Kyupid team to better understand their business by plotting this data in a meaningful way on a map by matching the user location to areas in Bangalore.
+
+Live site url: https://mjcreations-kyupid.netlify.app/

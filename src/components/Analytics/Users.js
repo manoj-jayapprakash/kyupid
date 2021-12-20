@@ -1,4 +1,3 @@
-import './Analytics.css';
 import { Bar } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
 import {
@@ -23,9 +22,8 @@ ChartJS.register(
 );
 
 export const Users = ({ maleData, femaleData, areaUsers }) => {
-  const userLabels = ['Male', 'Female'];
   const userData = {
-    labels: userLabels,
+    labels: ['Male', 'Female'],
     datasets: [
       {
         label: 'Number of Users',
@@ -35,10 +33,8 @@ export const Users = ({ maleData, femaleData, areaUsers }) => {
     ],
   };
 
-  let labels = areaUsers.map((area) => area.name);
-
   const areaData = {
-    labels,
+    labels: areaUsers.map((area) => area.name),
     datasets: [
       {
         label: 'Number of Users',

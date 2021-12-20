@@ -6,6 +6,22 @@ export const formatData = (data) => {
 
   const userInfo = data.userData?.users;
 
+  const populateAreaDetails = (currentArea, currentUser) => {
+    //Increase the user count for the given area
+    currentArea[currentUser.area_id].totalUserCount++;
+
+    //Update the male/female/others value based on the gender of the user
+    if (currentUser.gender === 'M') currentArea[currentUser.area_id].male++;
+    else if (currentUser.gender === 'F')
+      currentArea[currentUser.area_id].female++;
+    else currentArea[currentUser.area_id].others++;
+
+    //Update the premium users count for the given area
+    if (currentUser.is_pro_user) {
+      currentArea[currentUser.area_id].premiumUser++;
+    }
+  };
+
   if (userInfo.length) {
     for (let i = 0; i < userInfo.length; i++) {
       //Retrieves Gender Info
@@ -16,30 +32,15 @@ export const formatData = (data) => {
       //Retrieves area information
       if (!areaInfo[userInfo[i].area_id]) {
         areaInfo[userInfo[i].area_id] = {
+          //Initialize area with default values if the area didn't exist already
           totalUserCount: 0,
           premiumUser: 0,
           male: 0,
           female: 0,
           others: 0,
         };
-        areaInfo[userInfo[i].area_id].totalUserCount++;
-        if (userInfo[i].gender === 'M') areaInfo[userInfo[i].area_id].male++;
-        else if (userInfo[i].gender === 'F')
-          areaInfo[userInfo[i].area_id].female++;
-        else areaInfo[userInfo[i].area_id].others++;
-        if (userInfo[i].is_pro_user) {
-          areaInfo[userInfo[i].area_id].premiumUser++;
-        }
-      } else {
-        areaInfo[userInfo[i].area_id].totalUserCount++;
-        if (userInfo[i].gender === 'M') areaInfo[userInfo[i].area_id].male++;
-        else if (userInfo[i].gender === 'F')
-          areaInfo[userInfo[i].area_id].female++;
-        else areaInfo[userInfo[i].area_id].others++;
-        if (userInfo[i].is_pro_user) {
-          areaInfo[userInfo[i].area_id].premiumUser++;
-        }
       }
+      populateAreaDetails(areaInfo, userInfo[i]);
     }
   }
 
@@ -55,6 +56,7 @@ export const formatData = (data) => {
         others: areaInfo[area.properties.area_id].others,
         coordinates: area.geometry.coordinates[0][0],
       };
+    else return {};
   });
 
   return {

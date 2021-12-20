@@ -6,6 +6,15 @@
   padding: 1rem;
 }
 
+.loading {
+  position: absolute;
+  inset: 50% 0 0 50%;
+}
+
 .maparea p {
   font-weight: 700;
+}
+
+.user-data {
+  width: min(100%, 15rem);
 }
