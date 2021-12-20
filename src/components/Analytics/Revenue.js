@@ -18,29 +18,14 @@ ChartJS.register(
   Legend
 );
 
-export const Revenue = ({ revenue, areaNames }) => {
-  // console.log(users.features);
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Revenue per area',
-      },
-    },
-  };
-
-  const labels = Object.values(areaNames);
-
+export const Revenue = ({ revenue }) => {
+  let labels = revenue.map((r) => r.name);
   const revenueData = {
     labels,
     datasets: [
       {
         label: 'Number of Premium Users',
-        data: Object.values(revenue),
+        data: revenue.map((r) => r.premiumUsers),
         backgroundColor: '#ECB365',
       },
     ],

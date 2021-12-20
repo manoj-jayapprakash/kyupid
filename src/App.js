@@ -2,8 +2,9 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { MapArea } from './components/MapArea/MapArea';
+import { formatData } from './components/data';
 function App() {
-  const [apiData, setApiData] = useState({});
+  const [apiData, setApiData] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -20,12 +21,14 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(apiData);
+
+  if (!apiData) return <p>Loading</p>;
+  const data = formatData(apiData);
 
   return (
     <div className="app">
-      <Dashboard data={apiData} />
-      <MapArea data={apiData} />
+      <Dashboard area={data.areaInfo} user={data.usersInfo} />
+      <MapArea area={data.areaInfo} />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import './Analytics.css';
 import { Bar } from 'react-chartjs-2';
-import zoomPlugin from 'chartjs-plugin-zoom';
 import { Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -20,47 +19,35 @@ ChartJS.register(
   ArcElement,
   Title,
   Tooltip,
-  Legend,
-  zoomPlugin
+  Legend
 );
 
-export const Users = ({ maleData, femaleData, areaUsers, areaNames }) => {
-  console.log(maleData[0]);
+export const Users = ({ maleData, femaleData, areaUsers }) => {
   const userLabels = ['Male', 'Female'];
   const userData = {
     labels: userLabels,
     datasets: [
       {
         label: 'Number of Users',
-        data: [maleData.length, femaleData.length],
+        data: [maleData, femaleData],
         backgroundColor: ['#4C3F91', '#F2789F'],
       },
     ],
   };
-  const areaLabels = Object.values(areaNames);
+
+  let labels = areaUsers.map((area) => area.name);
+
   const areaData = {
-    labels: areaLabels,
+    labels,
     datasets: [
       {
         label: 'Number of Users',
-        data: Object.values(areaUsers),
+        data: areaUsers.map((area) => area.userCount),
         backgroundColor: '#064635',
       },
     ],
   };
 
-  const areaOptions = {
-    responsive: true,
-    plugins: {
-      zoom: {
-        pan: {
-          enabled: true,
-          mode: 'x',
-        },
-      },
-    },
-  };
-  console.log(Object.values(areaUsers));
   return (
     <div className="data">
       <article className="user-data">
@@ -69,7 +56,7 @@ export const Users = ({ maleData, femaleData, areaUsers, areaNames }) => {
       </article>
       <article className="area-data">
         <p className="user-data__title">Number of Users Per Area</p>
-        <Bar options={areaOptions} data={areaData} />
+        <Bar data={areaData} />
       </article>
     </div>
   );
